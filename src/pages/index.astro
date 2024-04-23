@@ -1,23 +1,46 @@
 ---
-import Layout from '@/layouts/Layout.astro';
-
-
+import LinkButton from "@/components/LinkButton.astro";
+import SectionContainer from "@/components/SectionContainer.astro";
+import Layout from "@/layouts/Layout.astro";
+import GithubIcon from "@/icons/Github.astro";
+import Tools from "@/components/Tools.astro";
 ---
 
-<Layout title="La navaja suiza del dev">
-	<main>
-		<h1>la navaja suiza del dev</h1>
+<Layout
+	title="La navaja suiza del dev"
+	description="Un kit de herramientas utiles para desarrolladores web."
+>
+	<main class="px-4">
+		<SectionContainer>
+			<div
+				class="flex flex-row justify-center items-stretch px-16 py-8 gap-x-8"
+			>
+				<img
+					class="rotate-45 size-16"
+					src="images/swiss-knife.svg"
+					alt="Navaja Suiza"
+				/>
+				<h1
+					class="text-accent text-3xl text-center font-bold flex flex-row gap-x-4 pb-6"
+				>
+					La Navaja Suiza del Dev
+				</h1>
+			</div>
+			<p class="text-white text-xl text-center">
+				Un kit de herramientas utiles para desarrolladores web.
+			</p>	
+
+			<div class="flex flex-row justify-center items-center gap-x-4 pt-8">
+				<LinkButton class="" href="https://github.com/FrankM01/la-navaja-suiza-del-dev">
+					<GithubIcon class="size-12  text-center " />
+					<span>Ver en Github</span>				
+				</LinkButton>
+			</div>
+		</SectionContainer>
+			
+		<SectionContainer>
+			<Tools />
+		</SectionContainer>
+
 	</main>
 </Layout>
-
-<style>
-	main {
-		margin: auto;
-		padding: 1rem;
-		width: 800px;
-		max-width: calc(100% - 2rem);
-		color: white;
-		font-size: 20px;
-		line-height: 1.6;
-	}
-</style>

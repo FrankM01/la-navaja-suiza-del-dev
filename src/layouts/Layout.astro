@@ -1,4 +1,7 @@
 ---
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+
 
 // Supports weights 100-900
 import '@fontsource-variable/onest';
@@ -24,29 +27,26 @@ const { title, description } = Astro.props;
 		<title>{title}</title>
 	</head>
 	<body>
+		<Header/>
 		<slot />
+		<Footer></Footer>
 	</body>
 </html>
 <style is:global>
 	:root{
-		color-scheme: light dark;
+		--color-primary: #29252C;
+		
 	}
 	html {
 		font-family: 'Cascadia Code', monospace;
 		display: flex;
 		flex-direction: column;
 		min-height: 100vh;
-		overscroll-behavior: none;
+		background-color: var(--color-primary);
 	}
 	h2,p,a{
 		font-family: 'Onest Variable', sans-serif;
 
 	}
 
-	@media (prefers-reduced-motion: reduce{
-		html{
-			scroll-behavior: auto;
-		}
-	});
-	
 </style>
