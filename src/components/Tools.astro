@@ -5,54 +5,61 @@ const TOOLS = [
         description:
             "Si no tienes idea de color elegir para que sea tu color primario, pues deja que lo haga por ti. ",
         image: "images/brush.svg",
+        link: "random-color.html"
     },
     {
         title: "RGB Color",
         description:
-            "Pon un color RGB y visualiza como quedaria tus componentes..",
+            "Pon un color RGB y visualiza como quedaria tus componentes con ese color.",
         image: "images/rgb.svg",
+        link: "rgb-color.html"
     },
     {
         title: "Generador de Citas",
         description:
             "Si necesitas colocar citas en tu web, este generador puede ser de tu ayuda..",
         image: "images/quotes.svg",
+        link: "quote-generator.html"
     },
     {
         title: "Generador de paletas de colores",
         description:
             "Un generador de paletas para que tus paginas esten asombrosas.",
         image: "images/palette.svg",
+        link: "color-palette.html"
     },
     {
         title: "Lorem Ipsum",
         description:
             "Generar diferentes tipos de texto lorem ipsum.",
         image: "images/lorem.svg",
+        link: "lorem-ipsum.html"
     },
     {
         title: "Convertidor de Unidades",
         description:
             "Convierte tus unidades de medida facilmente.",
         image: "images/ruler.svg",
+        link: "unit-converter.html"
     },
     {
         title: "API Texto",
         description:
             "Genera textos de ejemplos para tus JSON",
         image: "images/api.svg",
+        link: "api-text.html"
     },
 ];
 ---
 
-<section class="flex flex-col gap-y-16 p-4">
+<section class="flex flex-col md:grid md:grid-cols-2 gap-y-16 p-4 md:gap-4">
     {
-        TOOLS.map(({ image, title, description }) => (
-            <a href="#" class="bg-secondary flex flex-col rounded-b-2xl">
+        TOOLS.map(({ image, title, description,link }) => (
+            <a href={link} class="bg-secondary flex flex-col rounded-b-2xl transition hover:scale-105">
                 <img
                     class="size-fit p-16"
                     src={image}
-                    alt={`Captura de pantalla del projecto ${image}`}
+                    alt={`Captura de pantalla del proyecto ${image}`}
                 />
                 <div class = "bg-third rounded-b-2xl border-t-2 border-black">
                     <h3 class="text-accent text-2xl font-semibold text-center px-2 py-2 pb-4">
