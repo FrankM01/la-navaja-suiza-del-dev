@@ -2,15 +2,88 @@
 import LinkButton from "@/components/LinkButton.astro";
 import SectionContainer from "@/components/SectionContainer.astro";
 import Layout from "@/layouts/Layout.astro";
-import GithubIcon from "@/icons/Github.astro";
-import Tools from "@/components/Tools.astro";
+import Button from "@/components/LinkButton.astro";
 ---
+
 <Layout
 	title="Generador de citas "
 	description="Generador de citas aleatorias en español"
 >
-	<main class="px-4">
-		
-
+	<main class="px-4 pb-8">
+		<SectionContainer>
+			<div class="flex flex-col justify-center items-center p-2 border rounded border-black border-b-4 ">
+				<h1 class="text-4xl text-center text-accent font-bold p-5" id="title">
+					Citas Motivacionales
+				</h1>
+				<div class="flex flex-col justify-center items-center p-5 gap-y-10 text-center text-white ">
+					<p class="text-3xl" id="quote"></p>
+					<p class="text-2xl" id="author"></p>
+					<Button id="btn-change-quote">Siguiente Cita</Button>
+				</div>
+			</div>
+		</SectionContainer>
 	</main>
 </Layout>
+
+<script>
+	let quotes = [
+		{
+			author: "Albert Einstein",
+			text: "I have no special talents. I am only passionately curious.",
+		},
+		{
+			author: "Anonymous",
+			text: "Weeks of programming can save you hours of planning.",
+		},
+		{
+			author: "Alan Kay",
+			text: "The best way to predict the future is to invent it.",
+		},
+		{
+			author: "Amelia Earhart",
+			text: "The most difficult thing is the decision to act, the rest is merely tenacity.",
+		},
+		{
+			author: "Aristotle",
+			text: "Quality is not an act, it is a habit.",
+		},
+		{
+			author: "Benjamin Franklin",
+			text: "Tell me and I forget. Teach me and I remember. Involve me and I learn.",
+		},
+		{
+			author: "Charles R. Swindoll",
+			text: "Life is 10% what happens to you and 90% how you react to it.",
+		},
+		{
+			author: "Jane Goodall",
+			text: "What you do makes a difference. And you have to decide what kind of difference you want to make.",
+		},
+		{
+			author: "John Muir",
+			text: "The power of imagination makes us infinite.",
+		},
+		{
+			author: "Mark Twain",
+			text: "The two most important days in your life are the day you are born and the day you find out why.",
+		},
+	];
+
+	const btnElem = document.getElementById("btn-change-quote");
+	const quoteElem = document.getElementById("quote");
+	const authorElem = document.getElementById("author");
+
+	function generateRandomInt(min, max) {
+		return Math.floor(Math.random() * (max - min + 1)) + min;
+	}
+
+	function changeQuote() {
+		const randomIndex = generateRandomInt(0, quotes.length - 1);
+		quoteElem.innerText = `"${quotes[randomIndex].text}"`;
+		authorElem.innerText = quotes[randomIndex].author;
+	}
+
+	changeQuote();
+
+	btnElem.addEventListener("click", changeQuote);
+</script>
