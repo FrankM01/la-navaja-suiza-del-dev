@@ -1,8 +1,7 @@
 ---
-import LinkButton from "@/components/LinkButton.astro";
-import SectionContainer from "@/components/SectionContainer.astro";
-import Layout from "@/layouts/Layout.astro";
-import GithubIcon from "@/icons/Github.astro";
+import SectionContainer from '@/components/SectionContainer.astro';
+import Layout from '@/layouts/Layout.astro';
+import Button from '@/components/LinkButton.astro';
 ---
 <Layout
 	title="Generador de paletas de colores "
@@ -10,8 +9,54 @@ import GithubIcon from "@/icons/Github.astro";
 >
 	<main class="px-4">
 		<SectionContainer>
-
+			<div class="flex flex-col m-2 border-2 rounded-xl border-black  overflow-hidden " id="pallete-container"></div>
+			<div class="flex flex-row justify-center mt-6">
+				<Button id="button">Generar paleta</Button>
+			</div>
 		</SectionContainer>
 
 	</main>
 </Layout>
+
+
+<script>
+	
+	const pallete = document.getElementById('pallete-container');
+	const button = document.getElementById('button');
+	const colorValues = ['1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'];
+	const PALLETE_SIZE = 4;
+
+	
+
+	const createPallete = () => {
+		for (let i = 0; i < PALLETE_SIZE; i++) {
+			const palleteElement = document.createElement('div')
+			palleteElement.classList.add('pallete-item')
+			palleteElement.classList.add('transition', 'duration-500', 'ease-in-out', 'transform', 'hover:scale-110', 'cursor-pointer', 'flex', 'items-center', 'justify-start','p-6' ,'h-31', 'text-white', 'font-bold', 'text-2xl', 'bg-gray-800', 'border-2', 'border-black', 'rounded-xl', 'm-2')
+			pallete.appendChild(palleteElement)
+		}
+		updatePallete()
+	}
+
+	const colorize = (element) => {
+		let color = '#';
+		for (let i = 0; i < 6; i++) {
+			const randomElement = colorValues[Math.floor(Math.random() * colorValues.length)];
+			color += randomElement;
+		};
+		element.style.backgroundColor = color;
+		element.innerHTML = `<span class="colorHex p-2 text-white inline-block min-w-20 bg-black bg-opacity-20 rounded-xl m-2 ">${color}</span>`;
+	}
+
+	const updatePallete = () => {
+		for (let i = 0; i < pallete.children.length; i++) {
+			colorize(pallete.children[i])
+		}
+	}
+	createPallete()
+
+	button.addEventListener('click', updatePallete)
+
+</script>
+
+
