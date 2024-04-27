@@ -1,16 +1,58 @@
 ---
-import LinkButton from "@/components/LinkButton.astro";
+import Button from "@/components/LinkButton.astro";
 import SectionContainer from "@/components/SectionContainer.astro";
 import Layout from "@/layouts/Layout.astro";
-import GithubIcon from "@/icons/Github.astro";
-import Tools from "@/components/Tools.astro";
----
-<Layout
-	title="Lorem Ipsum "
-	description="Generador de textos Lorem Ipsum"
->
-	<main class="px-4">
-		
 
+---
+
+<Layout title="Lorem Ipsum " description="Generador de textos Lorem Ipsum">
+	<main class="px-4">
+		<SectionContainer>
+			<div class="flex flex-row flex-wrap justify-center items-center gap-4 mb-8 mt-1 text-black text-xl w-60 relative m-auto ">
+				<input class="bg-secondary text-accent font-bold text-center text-2xl p-4 rounded-md border-2 border-primary" type="number" id="no-of-para" value="2" max="20" />
+				<Button id="generate-btn">Generar</Button>
+				<Button id="copy-btn">Copiar</Button>
+			</div>
+			<div class="text-center lg:text-pretty text-white/70 leading-tight gap-2" id="para"></div>
+						
+		</SectionContainer>
 	</main>
 </Layout>
+
+<script>
+	import { apiKey } from "@/scripts/api-key.js";
+	let generateBtn = document.getElementById("generate-btn");
+	let copyBtn = document.getElementById("copy-btn");
+	let paraDisplay = document.getElementById("para");
+	let url = "https://api.api-ninjas.com/v1/loremipsum?paragraphs=";
+	let options = {
+		method: "GET",
+		headers: {
+			"x-api-key": apiKey,
+		},
+	};
+
+	let generateParas = () => {
+	paraDisplay.innerHTML = '';
+  	let noOfPara = document.getElementById("no-of-para").value;
+  	let finalURL = url + noOfPara;
+  	fetch(finalURL, options)
+    .then((res) => res.json())
+    .then((data) => {	
+      data.text.split('\n').forEach((paragraphText) => {
+        let para = document.createElement("p");
+        para.textContent = paragraphText;
+        para.classList.add("mb-4");
+        paraDisplay.appendChild(para);
+      });
+    });
+};
+
+	copyBtn.addEventListener("click", () => {
+		navigator.clipboard.writeText(paraDisplay.innerText);
+		alert("Copied to clipboard");
+	});
+
+	generateBtn.addEventListener("click", generateParas);
+	window.addEventListener("load", generateParas);
+</script>
