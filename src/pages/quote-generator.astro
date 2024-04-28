@@ -17,8 +17,14 @@ import Button from "@/components/LinkButton.astro";
 				<div class="flex flex-col justify-center items-center p-5 gap-y-10 text-center text-white ">
 					<p class="text-3xl" id="quote"></p>
 					<p class="text-2xl" id="author"></p>
-					<Button id="btn-change-quote">Siguiente Cita</Button>
+					<div>
+						<Button id="btn-change-quote">Siguiente Cita</Button>
+						<Button id="btn-copy">Copiar</Button>
+					</div>
 				</div>
+				<div id="popup-message" class="text-white p-4 rounded-lg bg-black absolute bottom-40 mb-4" style="display: none;">
+                    Texto copiado!
+                </div>
 			</div>
 		</SectionContainer>
 	</main>
@@ -71,6 +77,20 @@ import Button from "@/components/LinkButton.astro";
 	const btnElem = document.getElementById("btn-change-quote");
 	const quoteElem = document.getElementById("quote");
 	const authorElem = document.getElementById("author");
+	const copyBtn = document.getElementById("btn-copy");
+    const popupMessage = document.getElementById("popup-message");
+    popupMessage.style.display = "none";
+
+	copyBtn.addEventListener("click", () => {
+        navigator.clipboard.writeText(quote.innerText).then(() => {
+            popupMessage.style.display = "block";
+            setTimeout(() => {
+                popupMessage.style.display = "none";
+            }, 1000);
+        }).catch((err) => {
+            console.error('Error al copiar el texto: ', err);
+        });
+    });
 
 	function generateRandomInt(min, max) {
 		return Math.floor(Math.random() * (max - min + 1)) + min;
