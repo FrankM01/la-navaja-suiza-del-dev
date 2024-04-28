@@ -9,10 +9,12 @@ import Layout from "@/layouts/Layout.astro";
 >
 	<main class="px-4 pb-4">
 		<SectionContainer>
+			<h1 class="text-6xl text-accent font-bold text-center">RGB Color</h1>
+
 			<div
 				class="flex flex-col justify-center items-center text-white/70 text-3xl font-bold p-5 m-2"
 			>
-				<label class="pb-2" for="red">Red (R)</label>
+				<label class="pb-2" for="red" id="redLabel">Red (R)</label>
 				<input
 					id="red"
 					type="range"
@@ -26,7 +28,7 @@ import Layout from "@/layouts/Layout.astro";
 			<div
 				class="flex flex-col justify-center items-center text-white/70 text-3xl font-bold p-5 m-2"
 			>
-				<label class="pb-2" for="green">Green (G)</label>
+				<label class="pb-2" for="green" id="greenLabel">Green (G)</label>
 				<input
 					id="green"
 					type="range"
@@ -40,7 +42,7 @@ import Layout from "@/layouts/Layout.astro";
 			<div
 				class="flex flex-col justify-center items-center text-white/70 text-3xl font-bold p-5 m-2"
 			>
-				<label class="pb-2" for="blue">Blue (B)</label>
+				<label class="pb-2" for="blue" id="blueLabel">Blue (B)</label>
 				<input
 					id="blue"
 					type="range"
@@ -56,6 +58,10 @@ import Layout from "@/layouts/Layout.astro";
 </Layout>
 
 <script>
+	const redLabel = document.getElementById("redLabel");
+	const greenLabel = document.getElementById("greenLabel");
+	const blueLabel = document.getElementById("blueLabel");
+
 	const inputRed = document.getElementById("red");
 	const inputGreen = document.getElementById("green");
 	const inputBlue = document.getElementById("blue");
@@ -75,6 +81,21 @@ import Layout from "@/layouts/Layout.astro";
 	function updateColor(red, green, blue) {
 		const colorRGB = `rgb(${red}, ${green}, ${blue})`;
 		document.body.style.backgroundColor = colorRGB;
+		if (red >= '200' || green >= '200' || blue >= '200') {
+			redText.style.color = 'black';
+			greenText.style.color = 'black';
+			blueText.style.color = 'black';
+			redLabel.style.color = 'black';
+			greenLabel.style.color = 'black';
+			blueLabel.style.color = 'black';
+		} else {
+			redText.style.color = 'white';
+			greenText.style.color = 'white';
+			blueText.style.color = 'white';
+			redLabel.style.color = 'white';
+			greenLabel.style.color = 'white';
+			blueLabel.style.color = 'white';
+		}
 	}
 
 	// *For update RED
