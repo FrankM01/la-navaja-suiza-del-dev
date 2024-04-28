@@ -8,19 +8,20 @@ import Layout from "@/layouts/Layout.astro";
 >
 	<main class="px-4">
 		<SectionContainer>
+			<h1 class="text-3xl text-white font-bold text-center pb-6">Convertidor de Unidades PX-EM</h1>
 			<div class="bg-secondary text-2xl  p-4 rounded-md">
-				<h1 class="text-3xl text-white font-bold text-center">Convertidor de Unidades PX-EM</h1>
-				<div class="flex flex-col justify-center items-center p-4 mb-2">
+				
+				<div class="flex flex-row justify-between items-center p-4 mb-2 gap-x-4">
 					<lable class="block font-bold text-accent" for="inp-base-px">Tamaño Base en PX:</lable>
-					<input class="bg-third text-2xl text-white rounded-lg border-2 border-primary p-2 w-32 m-4 " type="number" id="inp-base-px"  value="16" />
+					<input class="bg-third text-white rounded-lg border-2 border-primary p-2 w-32 " type="number" id="inp-base-px"  value="16" />
 				</div>
-				<div class="flex flex-row justify-center items-center p-4 mb-2 gap-x-4">
+				<div class="flex flex-row justify-between items-center p-4 mb-2 gap-x-4">
 					<lable class="font-bold text-accent" for="inp-px">PX:</lable>
-					<input class="bg-third text-white rounded-lg border-2 border-primary p-2"  type="number" id="inp-px"  placeholder="px" />
+					<input class="bg-third text-white rounded-lg border-2 border-primary p-2 w-64"  type="number" id="inp-px"  placeholder="px" />
 				</div>
-				<div class="flex flex-row justify-center items-center p-4 mb-2 gap-x-4">
+				<div class="flex flex-row justify-between items-center p-4 mb-2 gap-x-4">
 					<lable class="font-bold text-accent" for="inp-em">EM:</lable>
-					<input  class="bg-third text-white rounded-lg border-2 border-primary p-2" type="number" id="inp-em" placeholder="em" />
+					<input  class="bg-third text-white rounded-lg border-2 border-primary p-2 w-64" type="number" id="inp-em" placeholder="em" />
 				</div>
 			</div>
 		</SectionContainer>
