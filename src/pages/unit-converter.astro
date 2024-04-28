@@ -9,8 +9,80 @@ import Layout from "@/layouts/Layout.astro";
 >
 	<main class="px-4">
 		<SectionContainer>
-			<div id="pallete-container"></div>
-			<Button id="button-pallete">Generar Paleta</Button>
+			<div class="">
+				<h1 class="text-3xl text-white  font-bold text-center">Convertidor de Unidades PX-EM</h1>
+				<div class="">
+					<lable  for="inp-base-px">Tamaño Base en PX:</lable>
+					<input type="number" id="inp-base-px" class="bg-secondary" value="16" />
+				</div>
+				<div class="">
+					<div>
+						<lable for="inp-px">PX:</lable>
+						<input type="number" id="inp-px" class="bg-secondary" placeholder="px" />
+					</div>
+					<div>
+						<lable for="inp-em">EM:</lable>
+						<input type="number" id="inp-em" class="bg-secondary" placeholder="em" />
+					</div>
+				</div>
+			</div>
 		</SectionContainer>
 	</main>
 </Layout>
+
+
+<script>
+	let inpBase = document.getElementById('inp-base-px')
+	let inpPX = document.getElementById('inp-px')
+	let inpEm = document.getElementById('inp-em')
+
+	//Function to convert px to em
+	let pxToEm = () =>{
+		let inpBaseValue = (inpBase as HTMLInputElement).value;
+		let pxValue = (inpPX as HTMLInputElement).value;
+		//Checking if the input field is not empty
+		// if not empty then calculate the em value
+		if(Number(pxValue) !== 0){
+			(inpEm as HTMLInputElement).value = (Number(pxValue) / Number(inpBaseValue)).toFixed(2);
+		}
+		// if empty then clear EM field
+		else{
+			(inpEm as HTMLInputElement).value = '';
+		}
+	}
+
+	//Function to convert em to px
+	let emToPX = () =>{
+		let inpBaseValue = (inpBase as HTMLInputElement).value;
+		let emValue = (inpEm as HTMLInputElement).value;
+		//Checking if the input field is not empty
+		// if not empty then calculate the px value
+		if(emValue.length !== 0){
+			(inpPX as HTMLInputElement).value = (Number(emValue) * Number(inpBaseValue)).toString();
+		}
+		// if empty then clear PX field
+		else{
+			(inpPX as HTMLInputElement).value = '';
+		}
+	}
+
+	// Function to calculate px and em when base font size is changed
+	let calcEmPx = () =>{
+		//Checking if the input field is not empty
+		// If not empty then run emToPX and pxToEm functions
+		if((inpBase as HTMLInputElement).value.length !== 0){
+			emToPX();
+		}
+		// If empty then clear all fields
+		else{
+			(inpPX as HTMLInputElement).value = '';
+			(inpEm as HTMLInputElement).value = '';
+		}
+	}
+
+
+	//Adding oninput event to the input field
+	inpPX.oninput = pxToEm;
+	inpEm.oninput = emToPX;
+	inpBase.oninput = calcEmPx;
+</script>
