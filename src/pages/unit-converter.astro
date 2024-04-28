@@ -1,5 +1,4 @@
 ---
-import Button from "@/components/LinkButton.astro";
 import SectionContainer from "@/components/SectionContainer.astro";
 import Layout from "@/layouts/Layout.astro";
 ---
@@ -9,21 +8,19 @@ import Layout from "@/layouts/Layout.astro";
 >
 	<main class="px-4">
 		<SectionContainer>
-			<div class="">
-				<h1 class="text-3xl text-white  font-bold text-center">Convertidor de Unidades PX-EM</h1>
-				<div class="">
-					<lable  for="inp-base-px">Tamaño Base en PX:</lable>
-					<input type="number" id="inp-base-px" class="bg-secondary" value="16" />
+			<div class="bg-secondary text-2xl  p-4 rounded-md">
+				<h1 class="text-3xl text-white font-bold text-center">Convertidor de Unidades PX-EM</h1>
+				<div class="flex flex-col justify-center items-center p-4 mb-2">
+					<lable class="block font-bold text-accent" for="inp-base-px">Tamaño Base en PX:</lable>
+					<input class="bg-third text-2xl text-white rounded-lg border-2 border-primary p-2 w-32 m-4 " type="number" id="inp-base-px"  value="16" />
 				</div>
-				<div class="">
-					<div>
-						<lable for="inp-px">PX:</lable>
-						<input type="number" id="inp-px" class="bg-secondary" placeholder="px" />
-					</div>
-					<div>
-						<lable for="inp-em">EM:</lable>
-						<input type="number" id="inp-em" class="bg-secondary" placeholder="em" />
-					</div>
+				<div class="flex flex-row justify-center items-center p-4 mb-2 gap-x-4">
+					<lable class="font-bold text-accent" for="inp-px">PX:</lable>
+					<input class="bg-third text-white rounded-lg border-2 border-primary p-2"  type="number" id="inp-px"  placeholder="px" />
+				</div>
+				<div class="flex flex-row justify-center items-center p-4 mb-2 gap-x-4">
+					<lable class="font-bold text-accent" for="inp-em">EM:</lable>
+					<input  class="bg-third text-white rounded-lg border-2 border-primary p-2" type="number" id="inp-em" placeholder="em" />
 				</div>
 			</div>
 		</SectionContainer>
