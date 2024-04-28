@@ -7,14 +7,24 @@ import SectionContainer from "@/components/SectionContainer.astro";
 <Layout title="Color aleatorio" description="Generador de colores aleatorios">
     <main class="px-4 ">
         <SectionContainer>
-            <div
-                class="flex flex-col max-w-full justify-center items-center content-center mx-4 mt-32 mb-44 px-4 py-4 border-4 border-black gap-6"
-            >
-                <p class="text-6xl text-black font-bold" id="color">#2BB807</p>
-                <Button id="btn-color">
-                    <span>Cambiar Color</span>
-                </Button>
+            <h1 class="text-6xl text-accent font-bold text-center">Color Aleatorio</h1>
+            <div class="flex flex-col max-w-full justify-center items-center content-center mx-4 mt-32 mb-36 px-4 py-4 border-4 border-black gap-6 relative">
+                <p class="text-6xl text-white font-bold" id="color">#2BB807</p>
+                <div>
+                    <Button id="btn-color">
+                        <span>Cambiar Color</span>
+                    </Button>
+                    <Button id="btn-copy">
+                        <span>Copiar</span>
+                    </Button>
+                </div>
+                <!-- Popup Message Container -->
+                <div id="popup-message" class="text-white p-4 rounded-lg bg-black absolute -bottom-20 mb-4" style="display: none;">
+                    Texto copiado!
+                </div>
             </div>
+            
+        
         </SectionContainer>
     </main>
 </Layout>
@@ -22,10 +32,28 @@ import SectionContainer from "@/components/SectionContainer.astro";
 <script>
     const button = document.getElementById("btn-color");
     const color = document.getElementById("color");
+    const copyBtn = document.getElementById("btn-copy");
+    const popupMessage = document.getElementById("popup-message");
+    popupMessage.style.display = "none";
+
+
+    copyBtn.addEventListener("click", () => {
+        navigator.clipboard.writeText(color.innerText).then(() => {
+            // Muestra el mensaje emergente
+            popupMessage.style.display = "block";
+            setTimeout(() => {
+                popupMessage.style.display = "none"; // Oculta el mensaje después de 2 segundos
+            }, 1000);
+        }).catch((err) => {
+            console.error('Error al copiar el texto: ', err);
+        });
+    });
 
     function generateColor() {
         return "#" + Math.floor(Math.random() * 16777215).toString(16);
     }
+
+    
 
     button.addEventListener("click", () => {
         const randomColor = generateColor();
