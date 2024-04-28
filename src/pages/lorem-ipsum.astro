@@ -8,12 +8,18 @@ import Layout from "@/layouts/Layout.astro";
 <Layout title="Lorem Ipsum " description="Generador de textos Lorem Ipsum">
 	<main class="px-4">
 		<SectionContainer>
+			<h1 class="text-6xl text-accent font-bold text-center">RGB Color</h1>
+
 			<div class="flex flex-row flex-wrap justify-center items-center gap-4 mb-8 mt-1 text-black text-xl w-60 relative m-auto ">
 				<input class="bg-secondary text-accent font-bold text-center text-2xl p-4 rounded-md border-2 border-primary" type="number" id="no-of-para" value="2" max="20" />
 				<Button id="generate-btn">Generar</Button>
 				<Button id="copy-btn">Copiar</Button>
 			</div>
+			
 			<div class="text-center lg:text-pretty text-white/70 leading-tight gap-2" id="para"></div>
+			<div id="popup-message" class="text-white p-4 rounded-lg bg-black absolute left-1/3 bottom-1/3 lg:left-2/3 lg:bottom-2/3 mb-4" style="display: none;">
+				Texto copiado!
+			</div>
 						
 		</SectionContainer>
 	</main>
@@ -24,6 +30,9 @@ import Layout from "@/layouts/Layout.astro";
 	let generateBtn = document.getElementById("generate-btn");
 	let copyBtn = document.getElementById("copy-btn");
 	let paraDisplay = document.getElementById("para");
+	const popupMessage = document.getElementById("popup-message");
+    popupMessage.style.display = "none";
+
 	
 	let url = "https://api.api-ninjas.com/v1/loremipsum?paragraphs=";
 	let options = {
@@ -47,13 +56,18 @@ import Layout from "@/layouts/Layout.astro";
         paraDisplay.appendChild(para);
       });
     });
-};
+	};
 
 	copyBtn.addEventListener("click", () => {
-		navigator.clipboard.writeText(paraDisplay.innerText);
-		alert("Copied to clipboard");
-	});
+        navigator.clipboard.writeText(paraDisplay.innerText).then(() => {
+            popupMessage.style.display = "block";
+            setTimeout(() => {
+                popupMessage.style.display = "none";
+            }, 1000);
+        }).catch((err) => {
+            console.error('Error al copiar el texto: ', err);
+        });
+    });
 
 	generateBtn.addEventListener("click", generateParas);
-	window.addEventListener("load", generateParas);
 </script>
